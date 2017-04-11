@@ -20,7 +20,9 @@ func LoginHandler(ctx *middleware.Context, formErr binding.Errors, loginUser mod
 	switch ctx.R.Method {
 	case "POST":
 		ctx.JoinFormErrors(formErr)
-		password := Md5(loginUser.Password)
+		//password := Md5(loginUser.Password)
+		password := (loginUser.Password)
+
 		user := &model.User{Username: loginUser.Username, Password: password}
 		if !ctx.HasError() {
 			if has, err := user.Exist(); has {
