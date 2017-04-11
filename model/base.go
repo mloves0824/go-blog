@@ -4,8 +4,9 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/go-xorm/xorm"
 
-	. "github.com/easykoo/go-blog/common"
 	"time"
+
+	. "github.com/easykoo/go-blog/common"
 )
 
 var orm *xorm.Engine
@@ -15,13 +16,14 @@ func SetEngine() *xorm.Engine {
 	var err error
 	server := Cfg.MustValue("db", "server", "127.0.0.1")
 	username := Cfg.MustValue("db", "username", "root")
-	password := Cfg.MustValue("db", "password", "pass")
+	password := Cfg.MustValue("db", "password", "123456")
 	dbName := Cfg.MustValue("db", "db_name", "go_display")
 	orm, err = xorm.NewEngine("mysql", username+":"+password+"@tcp("+server+":3306)/"+dbName+"?charset=utf8")
 	PanicIf(err)
 	orm.TZLocation = time.Local
-	orm.ShowSQL = Cfg.MustBool("db", "show_sql", false)
-	orm.Logger = xorm.NewSimpleLogger(Log.GetWriter())
+	//orm.ShowSQL = Cfg.MustBool("db", "show_sql", false)
+	orm.ShowSQL(Cfg.MustBool("db", "show_sql", false))
+	//orm.Logger = xorm.NewSimpleLogger(Log.GetWriter())
 	return orm
 }
 
