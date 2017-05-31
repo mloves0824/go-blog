@@ -3,9 +3,9 @@ package handler
 import (
 	"github.com/go-martini/martini"
 
-	. "github.com/easykoo/go-blog/common"
-	"github.com/easykoo/go-blog/middleware"
-	"github.com/easykoo/go-blog/model"
+	. "github.com/mloves0824/go-blog/common"
+	"github.com/mloves0824/go-blog/middleware"
+	"github.com/mloves0824/go-blog/model"
 
 	"encoding/json"
 	"time"

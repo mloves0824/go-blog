@@ -3,7 +3,7 @@ package model
 import (
 	"github.com/easykoo/binding"
 
-	. "github.com/easykoo/go-blog/common"
+	. "github.com/mloves0824/go-blog/common"
 
 	"net/http"
 	"regexp"

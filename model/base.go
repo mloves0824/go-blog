@@ -6,7 +6,7 @@ import (
 
 	"time"
 
-	. "github.com/easykoo/go-blog/common"
+	. "github.com/mloves0824/go-blog/common"
 )
 
 var orm *xorm.Engine

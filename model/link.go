@@ -1,8 +1,9 @@
 package model
 
 import (
-	. "github.com/easykoo/go-blog/common"
 	"time"
+
+	. "github.com/mloves0824/go-blog/common"
 )
 
 type Link struct {

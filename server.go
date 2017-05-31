@@ -7,11 +7,11 @@ import (
 	"github.com/martini-contrib/render"
 	"github.com/russross/blackfriday"
 
-	. "github.com/easykoo/go-blog/auth"
-	. "github.com/easykoo/go-blog/common"
-	"github.com/easykoo/go-blog/handler"
-	"github.com/easykoo/go-blog/middleware"
-	"github.com/easykoo/go-blog/model"
+	. "github.com/mloves0824/go-blog/auth"
+	. "github.com/mloves0824/go-blog/common"
+	"github.com/mloves0824/go-blog/handler"
+	"github.com/mloves0824/go-blog/middleware"
+	"github.com/mloves0824/go-blog/model"
 
 	"encoding/gob"
 	"html/template"
