@@ -116,6 +116,15 @@ func Blog(ctx *middleware.Context) {
 	PanicIf(err)
 	ctx.Set("Tags", tags)
 
+	//add by chenb at 20170601 start
+	category := new(model.Category)
+	categoryDefault, err := category.GetCategoryById(0)
+	categorys := []string{}
+	categorys = append(categorys, categoryDefault.Description)
+	PanicIf(err)
+	ctx.Set("Categorys", categorys)
+	//add by chenb at 20170601 end
+
 	ctx.HTML(200, "blog", ctx)
 }
 
