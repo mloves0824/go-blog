@@ -8,6 +8,7 @@ import (
 	"github.com/mloves0824/go-blog/model"
 
 	"encoding/json"
+	"fmt"
 	"time"
 )
 
@@ -38,6 +39,16 @@ func PublishBlog(ctx *middleware.Context, blog model.Blog) {
 		tags, err := blog.GetAllTags()
 		PanicIf(err)
 		ctx.Set("Tags", tags)
+
+		//add by chenb at 20170601 start
+		category := new(model.Category)
+		categoryDefault, err := category.GetCategoryById(0)
+		categorys := []string{}
+		categorys = append(categorys, categoryDefault.Description)
+		PanicIf(err)
+		ctx.Set("Categorys", categorys)
+		fmt.Println("Categorys:", categorys)
+		//add by chenb at 20170601 end
 
 		ctx.HTML(200, "blog/edit", ctx)
 	}
@@ -228,6 +239,7 @@ func EditBlog(ctx *middleware.Context, params martini.Params) {
 	categorys = append(categorys, categoryDefault.Description)
 	PanicIf(err)
 	ctx.Set("Categorys", categorys)
+	fmt.Println("Categorys:", categorys)
 	//add by chenb at 20170601 end
 
 	ctx.HTML(200, "blog/edit", ctx)

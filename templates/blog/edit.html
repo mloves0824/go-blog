@@ -83,6 +83,26 @@
                         </div>
                         {{end}}
                     </div>
+					
+					<!-- add by chenb 20170605 start-->
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <input id="catagorys" name="catagorys" type="text" hidden="true">
+                            <span id="catagoryShow"></span>
+                        </div>
+                        {{if .Response.Categorys}}
+                        <div class="col-sm-8">
+                            <small>{{tsl .Session.Lang "label.common.catagorys"}}:</small>
+                            <span>
+                                {{range .Response.Categorys}}
+                                <span class="label label-info tag" onclick="addCatagory('{{.|html}}')">{{.|html}}</span>
+                                {{end}}
+                            </span>
+                        </div>
+                        {{end}}
+                    </div>					
+					<!-- add by chenb 20170605 end-->
+
                     <div class="form-group">
 
                         <div class="col-sm-2">
@@ -97,6 +117,23 @@
                             </div>
                         </div>
                     </div>
+					<!-- add by chenb 20170605 start-->
+                    <div class="form-group">
+
+                        <div class="col-sm-2">
+                            <div class="input-group">
+                                <input id="tempCategory" type="text" class="form-control"
+                                       placeholder='{{tsl .Session.Lang "label.category"}}'>
+                                <span class="input-group-btn">
+                                    <button type="button" onclick="addCatagory($('#tempCategory').val())" class="btn btn-info">
+                                        {{tsl .Session.Lang "label.add"}}
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>					
+					<!-- add by chenb 20170605 end-->
+
                     <div class="form-group">
                         {{if equal .Response.Blog.State "PUBLISHED"}}{{else}}
                         <div class="col-sm-2">
@@ -134,6 +171,7 @@
 <script type="text/javascript">
 
     var tags = [];
+	var catagorys = [];
     var blogId = 0;
     var version = 1;
     var mode = "EDIT";
@@ -191,9 +229,33 @@
         updateTagShow();
     }
 
+
+    var addCatagory = function (catagory) {
+        if (catagory.trim() == "") {
+            $('#tempCatagory').val("")
+            return;
+        }
+        if (catagorys.length >= 5) {
+            bootbox.alert('{{tsl .Session.Lang "message.error.max.tag"}}', null);
+            return;
+        }
+        $.inArray(catagory, catagorys) < 0 ? catagorys.push(catagory) : null;
+        $('#tempCatagory').val("")
+        updateCatagoryShow();
+    }
+
+
     var updateTagShow = function () {
         var html = ""
         for (var i = 0; i < tags.length; i++) {
+            html += '<a class="label label-info tag" href="javascript:deleteTag(\'' + tags[i] + '\')">' + tags[i] + '</a>&nbsp'
+        }
+        $('#tagShow').html(html)
+    }
+
+    var updateCatagoryShow = function () {
+        var html = ""
+        for (var i = 0; i < catagorys.length; i++) {
             html += '<a class="label label-info tag" href="javascript:deleteTag(\'' + tags[i] + '\')">' + tags[i] + '</a>&nbsp'
         }
         $('#tagShow').html(html)
